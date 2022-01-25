@@ -3,7 +3,7 @@ Program: Desigo CC 4.xx and 5.0 Trend Data convertor from CSV file into EXCEL fi
 Author: Anton Gegeniger
 e-Mail: anton.gegeniger@siemens.com
 Package requirements:
-    Python                  3.8 +
+    Python                  3.9 +
     pandas                  1.3.5
     numpy                   1.19.5
     xlwt                    1.3.0
@@ -129,6 +129,17 @@ def SaveSettings():
     with open(settings_fn,'w') as f:
         f.write(json_process)
 
+def CheckFolder(folder_path,createNew):
+    if not os.path.isdir(folder_path):
+        if createNew:
+            print ('\033[93m' + '!!! WARNING: The folder ' + folder_path + ' is NOT exist and will be created.'+'\033[0m')
+            os.makedirs(folder_path)
+        else:
+            print ('\033[93m' + '!!! WARNING: The folder ' + folder_path + ' is NOT exist!'+'\033[0m')
+    else:
+        print ('\033[93m' + folder_path + '    The folder is OK' +'\033[0m')
+
+
 
 
 # =====================  Main Program ========================
@@ -136,6 +147,14 @@ def SaveSettings():
 os.chdir(os.path.dirname(sys.argv[0]))
 if not ReadSettings():
     SaveSettings()
+
+#check folders defined in the settings, if not exist create new one
+print ('\033[92m' + 'Check if Trend folders defined in the Settings is existing'+'\033[0m')
+CheckFolder (settings['TrendPath'], True)
+
+print ('\033[92m' + 'Check if Trend folders defined in the Settings is existing'+'\033[0m')
+CheckFolder (settings['OutputPath'], True)
+
 
 ReadProcessed()
 
