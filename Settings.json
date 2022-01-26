@@ -1,4 +1,5 @@
 {
   "TrendPath": "c:/trends",
-  "OutputPath": "c:/trends/excel"
+  "OutputPath": "c:/trends/excel",
+  "ScanTime": 600
 }

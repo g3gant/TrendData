@@ -22,9 +22,10 @@ import sys
 #Get files in the directory
 path = 'c:/trends'
 processed = {}
-settings = {'TrendPath':'c:/trends','OutputPath':'c:/trends/excel'}
+settings = {'TrendPath':'c:/trends','OutputPath':'c:/trends/excel','ScanTime':600}
 settings_fn = './Settings.json'
 processed_fn = './processed.json'
+scanTime = 3
 
 
 def ReadIntoTable(fileName):
@@ -147,7 +148,7 @@ def CheckFolder(folder_path,createNew):
 os.chdir(os.path.dirname(sys.argv[0]))
 if not ReadSettings():
     SaveSettings()
-
+scanTime = settings['ScanTime']
 #check folders defined in the settings, if not exist create new one
 print ('\033[92m' + 'Check if Trend folders defined in the Settings is existing'+'\033[0m')
 CheckFolder (settings['TrendPath'], True)
@@ -184,7 +185,7 @@ while True:
                 print ('\033[93m' + outFileName + "  Hasn't been saved! Make sure it is not open and folder is not setup as Read Only" + '\033[0m')
         
 
-    time.sleep(10)
+    time.sleep(scanTime)
 
 
 
