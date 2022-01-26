@@ -7,7 +7,7 @@ Package requirements:
     pandas                  1.3.5
     numpy                   1.19.5
     xlwt                    1.3.0
-ab
+
 """
 import numpy as np
 import pandas
